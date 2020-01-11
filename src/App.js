@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import Hero from './components/Hero'
+import Menu from './components/Menu'
+import Routes from './Routes'
+import MenuButton from './components/MenuButton'
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = {
+     hideMenu: true
+    }
+
+    toggleMenu = () => {
+      this.setState({hideMenu: !this.state.hideMenu})
+    }
+
+    render(){
+      return (
+        <Router>
+          <div className="App">
+            <Routes/>
+            <Menu hideMenu={this.state.hideMenu}/>
+            <MenuButton hideMenu={this.state.hideMenu} toggleMenu={this.toggleMenu}/>
+          </div>
+        </Router>
+      )
+    }
+    ;
 }
 
 export default App;
